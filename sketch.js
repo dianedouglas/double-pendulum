@@ -1,7 +1,5 @@
-// var n = 30;
-// length of each pendulum
+// length of each pendulum and sliders to control.
 var r1Slider;
-var velSlider;
 var r1 = 200;
 var r2 = 200;
 
@@ -33,7 +31,6 @@ var gain = .1;
 function setup() {
   createCanvas(640, 480);
   r1Slider = createSlider(0, 100, 100);
-  velSlider = createSlider(0, 600, 500);
   button = createButton('Slow down you maniac!');
   button.mousePressed(slowDown);
   button = createButton('You want to go faster?');
@@ -53,7 +50,7 @@ function speedUp() {
 function draw() {
   // get value of sliders.
   r1Scalor = (r1Slider.value() / 100) + .2;
-  velScalor = (velSlider.value()) / 1000;
+  // velScalor = (velSlider.value()) / 1000;
   // a1_velocity = a1_velocity * velScalor;
   // n = n + 1;
   // if (mouseIsPressed) {
@@ -67,46 +64,16 @@ function draw() {
   var num1 = -g * (2 * m1 + m2) * sin(a1);
   var num2 = -m2 * g * sin(a1-2*a2);
   var num3 = -2 * sin(a1-a2)*m2;
-  var num4 = a2_velocity * velScalor * a2_velocity * velScalor * r2 + a1_velocity * velScalor * a1_velocity * velScalor * r1 * r1Scalor * cos(a1-a2); 
+  var num4 = a2_velocity * a2_velocity * r2 + a1_velocity * a1_velocity * r1 * r1Scalor * cos(a1-a2); 
   var den = r1 * r1Scalor * (2*m1+m2 - m2*cos(2*a1 - 2*a2));
   a1_acceleration = ((num1 + num2 + num3*num4) / den);
-  // a1_acceleration = ((num1 + num2 + num3*num4) / den) * velScalor;
 
-  // a1_acceleration: -0.0002543432225015634
-  // a2_acceleration: 0.0003810349101130054
-  // we want to slow down. sweet spot is between - and + .0003
-  // the accellerations are changing so that one is neg and the other pos.
-  // we want to preserve that. 
-  // let us try subtracting an amount on accelleration. 
-  // just want to move left on the number scale a bit
-  // -.0005 to + .0005 = + - 5/10000
-  // needs to go lower but this is the right idea.
-  // try times. nope. oh it is cause it was too small. 
-  // try expanding range down
-  // ok it has to be times. adjust range. 
-  // if you subtract too much it just gets fast in the other direction.
-  // to slow down you have to be closer to 0
-  // 0 - 1 works pretty well.
-  // velSlider = createSlider(0, 100, 100);
-  // min, max, start value -> createSlider
-  // velScalor = (velSlider.value()) / 100;
-  // increase amount divided to get smaller values. 
-  // 500 is good but it is not getting fast enough. 0 to 1/5
-  // increase range to 600 start at 500 = 1. 
-  // works quite well. how about on velocity. works pretty well. 
-  // still want to slow it down a bit more. maybe a button you push that just resets the velocity. 
-
-  // console.log('a1_acceleration: ' + a1_acceleration);
   num1 = 2 * sin(a1-a2);
-  num2 = (a1_velocity * velScalor * a1_velocity * velScalor * r1 * r1Scalor * (m1 + m2));
+  num2 = (a1_velocity * a1_velocity * r1 * r1Scalor * (m1 + m2));
   num3 = g * (m1 + m2) * cos(a1);
-  num4 = a2_velocity * velScalor * a2_velocity * velScalor * r2 * m2 * cos(a1 - a2);
+  num4 = a2_velocity * a2_velocity * r2 * m2 * cos(a1 - a2);
   den = r2 * (2*m1+m2 - m2*cos(2*a1 - 2*a2));
   a2_acceleration = ((num1*(num2+num3+num4)) / den);
-  // a2_acceleration = ((num1*(num2+num3+num4)) / den) * velScalor;
-  // console.log('a2_acceleration: ' + a2_acceleration);
-
-
 
   stroke(0);
   strokeWeight(2);
