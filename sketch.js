@@ -40,26 +40,20 @@ function setup() {
 function slowDown() {
   a2_velocity *= .618
   a1_velocity *= .618
+  a2_acceleration *= .618
+  a1_acceleration *= .618
 }
 
 function speedUp() {
   a2_velocity *= 1.618
   a1_velocity *= 1.618
+  a2_acceleration *= 1.618
+  a1_acceleration *= 1.618
 }
 
 function draw() {
-  // get value of sliders.
-  r1Scalor = (r1Slider.value() / 100) + .2;
-  // velScalor = (velSlider.value()) / 1000;
-  // a1_velocity = a1_velocity * velScalor;
-  // n = n + 1;
-  // if (mouseIsPressed) {
-  //   fill(0);
-  // } else {
-  //   fill(255);
-  // }
-  // ellipse(n, n, 80, 80);
   background(255);
+  r1Scalor = (r1Slider.value() / 100) + .2;
 
   var num1 = -g * (2 * m1 + m2) * sin(a1);
   var num2 = -m2 * g * sin(a1-2*a2);
