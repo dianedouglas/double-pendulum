@@ -34,14 +34,20 @@ function setup() {
   createCanvas(640, 480);
   r1Slider = createSlider(0, 100, 100);
   velSlider = createSlider(0, 600, 500);
-  button = createButton('btn');
+  button = createButton('Slow down you maniac!');
   button.mousePressed(slowDown);
-  // n = 30;
+  button = createButton('You want to go faster?');
+  button.mousePressed(speedUp);
 }
 
 function slowDown() {
   a2_velocity *= .618
   a1_velocity *= .618
+}
+
+function speedUp() {
+  a2_velocity *= 1.618
+  a1_velocity *= 1.618
 }
 
 function draw() {
