@@ -1,4 +1,4 @@
-# _Double Pendulum Visualizer
+# _Double Pendulum Visualizer_
 
 #### _A JavaScript prototype for an audio distortion plugin_
 
