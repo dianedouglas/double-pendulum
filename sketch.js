@@ -27,10 +27,12 @@ var harmonic2x = -200;
 var harmonic2y = 200;
 
 var gain = .1;
+var distance = harmonic1x - harmonic2x
 
 function setup() {
   createCanvas(640, 480);
-  r1Slider = createSlider(0, 100, 100);
+  r1Slider = createSlider(0, 100, 50);
+  distanceSlider = createSlider(0, 400, 400);
   button = createButton('Slow down you maniac!');
   button.mousePressed(slowDown);
   button = createButton('You want to go faster?');
@@ -53,6 +55,11 @@ function speedUp() {
 
 function draw() {
   background(255);
+
+  distance = distanceSlider.value();
+  harmonic1x = distance / 2;
+  harmonic2x = -distance / 2;
+
   r1Scalor = (r1Slider.value() / 100) + .2;
 
   var num1 = -g * (2 * m1 + m2) * sin(a1);
@@ -90,6 +97,7 @@ function draw() {
   // calculate distance to first point
   // even if harmonic1x -x2 is negative, sq makes it pos. so is sqrt.
   var distance1 = sqrt(sq(harmonic1x - x2) + sq(harmonic1y - y2)) * gain;
+  console.log(distance1);
   // draw dot size of distance
   ellipse(harmonic1x,harmonic1y,distance1,distance1);
   var distance2 = sqrt(sq(harmonic2x - x2) + sq(harmonic2y - y2)) * gain;
